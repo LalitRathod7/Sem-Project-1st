@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Blood Donation & Transfusion System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="home-page">
+    <header>
+        <h1>Emergency Blood Donation & Transfusion System</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="donor.html">Donor</a>
+            <a href="blood-bank.html">Blood Bank</a>
+            <a href="hospital.html">Hospital</a>
+            <button onclick="showSection('auth-section')">Login</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Floating Elements for Animation -->
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+
+        <!-- Critical Emergency Alert Banner -->
+        <div class="emergency-banner">
+            <div class="emergency-content">
+                <h3>🚨 CRITICAL BLOOD SHORTAGE ALERT</h3>
+                <p><strong>O- blood needed urgently at City Hospital!</strong></p>
+                <p>Every donation can save up to 3 lives. Your help is needed NOW!</p>
+                <div class="emergency-actions">
+                    <button class="emergency-action" onclick="showAuthModal()">Donate Now</button>
+                    <button class="emergency-action secondary" onclick="showEmergencyDetails()">View Details</button>
+                </div>
+            </div>
+        </div>
+
+        <section class="active">
+            <h2>Welcome</h2>
+            <p>Addressing blood shortages during emergencies. Connect hospitals, blood banks, and donors.</p>
+            <a href="login.html" class="role-link">Login to Access System</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Emergency Blood Donation System. All rights reserved.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

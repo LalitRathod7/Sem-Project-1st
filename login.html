@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Emergency Blood Donation System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="login-page">
+    <header>
+        <h1>Emergency Blood Donation & Transfusion System</h1>
+    </header>
+
+    <main>
+        <section id="login-section" class="active">
+            <h2>Login</h2>
+            <form id="login-form" aria-labelledby="login-heading">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" required aria-describedby="username-error">
+                    <small id="username-error" class="error-message" aria-live="polite"></small>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" required aria-describedby="password-error">
+                    <small id="password-error" class="error-message" aria-live="polite"></small>
+                </div>
+                <div class="form-group">
+                    <label for="role">Role:</label>
+                    <select id="role" aria-describedby="role-error">
+                        <option value="donor">Donor</option>
+                        <option value="hospital">Hospital</option>
+                        <option value="bloodbank">Blood Bank</option>
+                    </select>
+                    <small id="role-error" class="error-message" aria-live="polite"></small>
+                </div>
+                <button type="submit">Login</button>
+                <div id="login-message" aria-live="assertive"></div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Emergency Blood Donation System. All rights reserved.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

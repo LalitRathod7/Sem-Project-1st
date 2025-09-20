@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Search Blood - Emergency Blood Donation System</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header>
+        <h1>Emergency Blood Donation & Transfusion System</h1>
+        <nav>
+            <a href="#" id="back-link">Back to Dashboard</a>
+            <button onclick="logout()">Logout</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="search" class="active">
+            <h2>Search Available Blood</h2>
+            <form id="search-form" aria-labelledby="search-heading">
+                <label for="search-blood-type">Blood Type:</label>
+                <select id="search-blood-type">
+                    <option>Any</option>
+                    <option>A+</option>
+                    <option>A-</option>
+                    <option>B+</option>
+                    <option>B-</option>
+                    <option>AB+</option>
+                    <option>AB-</option>
+                    <option>O+</option>
+                    <option>O-</option>
+                </select>
+                <label for="location-search">Location:</label>
+                <input type="text" id="location-search" />
+                <button type="submit">Search</button>
+            </form>
+            <div id="search-results" aria-live="polite">
+                <!-- Results will be displayed here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Emergency Blood Donation System. All rights reserved.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

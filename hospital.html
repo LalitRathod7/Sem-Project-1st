@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hospital Page - Emergency Blood Donation System</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header>
+        <h1>Emergency Blood Donation & Transfusion System</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="donor.html">Donor</a>
+            <a href="blood-bank.html">Blood Bank</a>
+            <a href="hospital.html">Hospital</a>
+            <button onclick="showSection('auth-section')">Login</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hospital" class="active">
+            <h2>Hospital Dashboard</h2>
+            <form id="request-form">
+                <label for="blood-type">Blood Type:</label>
+                <select id="blood-type">
+                    <option>A+</option>
+                    <option>A-</option>
+                    <option>B+</option>
+                    <option>B-</option>
+                    <option>AB+</option>
+                    <option>AB-</option>
+                    <option>O+</option>
+                    <option>O-</option>
+                </select>
+                <label for="units">Units Needed:</label>
+                <input type="number" id="units" min="1" required />
+                <label for="urgency">Urgency:</label>
+                <select id="urgency">
+                    <option>Low</option>
+                    <option>Medium</option>
+                    <option>High</option>
+                    <option>Critical</option>
+                </select>
+                <button type="submit">Request Blood</button>
+            </form>
+        </section>
+
+        <section id="auth-section">
+            <div class="auth-container">
+                <div class="toggle-buttons">
+                    <button id="login-toggle" class="active">Login</button>
+                    <button id="signup-toggle">Signup</button>
+                </div>
+                <form id="login-form" class="auth-form active">
+                    <h2>Login</h2>
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" required />
+                        <small class="error-message" id="login-username-error"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" required />
+                        <small class="error-message" id="login-password-error"></small>
+                    </div>
+                    <button type="submit">Login</button>
+                    <div class="form-message" id="login-message"></div>
+                </form>
+
+                <form id="signup-form" class="auth-form">
+                    <h2>Signup</h2>
+                    <div class="form-group">
+                        <label for="new-username">Username:</label>
+                        <input type="text" id="new-username" required />
+                        <small class="error-message" id="signup-username-error"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">Password:</label>
+                        <input type="password" id="new-password" required />
+                        <small class="error-message" id="signup-password-error"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role:</label>
+                        <select id="role">
+                            <option value="donor">Donor</option>
+                            <option value="hospital">Hospital</option>
+                            <option value="bloodbank">Blood Bank</option>
+                        </select>
+                    </div>
+                    <button type="submit">Signup</button>
+                    <div class="form-message" id="signup-message"></div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Emergency Blood Donation System. All rights reserved.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
