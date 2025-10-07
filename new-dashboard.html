@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Emergency Blood Donation Dashboard</title>
+<style>
+  /* Reset and base */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9fafb;
+    color: #333;
+  }
+  /* Layout */
+  .container {
+    display: flex;
+    min-height: 100vh;
+  }
+  /* Sidebar */
+  nav.sidebar {
+    width: 250px;
+    background-color: #d32f2f;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+  }
+  nav.sidebar h1 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+  }
+  nav.sidebar a {
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  nav.sidebar a:hover {
+    background-color: #b71c1c;
+  }
+  nav.sidebar a .icon {
+    font-size: 1.2rem;
+  }
+  /* Main content */
+  main.content {
+    flex-grow: 1;
+    padding: 2rem;
+    background-color: #fff;
+  }
+  /* Header */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  header h2 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.75rem;
+  }
+  /* Cards */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .card {
+    background: #f5f5f5;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .card h3 {
+    margin: 0 0 0.5rem 0;
+    font-weight: 600;
+    color: #d32f2f;
+  }
+  .card p {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  thead {
+    background-color: #d32f2f;
+    color: white;
+  }
+  th, td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+  }
+  tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  tbody tr:hover {
+    background-color: #ffe6e6;
+  }
+  /* Buttons */
+  button {
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  button:hover {
+    background-color: #b71c1c;
+    transform: scale(1.05);
+  }
+  /* Inputs */
+  input[type="text"], select {
+    padding: 0.5rem 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    width: 100%;
+    margin-top: 0.25rem;
+    margin-bottom: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  input[type="text"]:focus, select:focus {
+    border-color: #d32f2f;
+    outline: none;
+  }
+  /* Responsive */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+    nav.sidebar {
+      width: 100%;
+      flex-direction: row;
+      overflow-x: auto;
+      padding: 0.5rem;
+    }
+    nav.sidebar a {
+      flex: 1 0 auto;
+      margin: 0 0.5rem 0 0;
+      padding: 0.5rem 0.75rem;
+      justify-content: center;
+    }
+    main.content {
+      padding: 1rem;
+    }
+    .cards {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 480px) {
+    .cards {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <nav class="sidebar" aria-label="Main navigation">
+      <h1>Blood Donation</h1>
+      <a href="donor-dashboard.html" title="Donor Dashboard"><span class="icon">👤</span> Donor</a>
+      <a href="hospital-dashboard.html" title="Hospital Dashboard"><span class="icon">🏥</span> Hospital</a>
+      <a href="blood-bank-dashboard.html" title="Blood Bank Dashboard"><span class="icon">🩸</span> Blood Bank</a>
+      <a href="blood-search.html" title="Search Blood"><span class="icon">🔍</span> Search Blood</a>
+      <a href="profile.html" title="Profile Settings"><span class="icon">⚙️</span> Profile</a>
+      <a href="feedback.html" title="Feedback"><span class="icon">✉️</span> Feedback</a>
+      <a href="login.html" title="Logout"><span class="icon">🚪</span> Logout</a>
+    </nav>
+    <main class="content" role="main">
+      <header>
+        <h2>Dashboard Overview</h2>
+        <button aria-label="Add new donation request">+ New Request</button>
+      </header>
+      <section class="cards" aria-label="Key metrics">
+        <article class="card" role="region" aria-labelledby="donors-count">
+          <h3 id="donors-count">Donors</h3>
+          <p>1,245</p>
+        </article>
+        <article class="card" role="region" aria-labelledby="requests-count">
+          <h3 id="requests-count">Requests</h3>
+          <p>312</p>
+        </article>
+        <article class="card" role="region" aria-labelledby="inventory-count">
+          <h3 id="inventory-count">Inventory Units</h3>
+          <p>4,580</p>
+        </article>
+        <article class="card" role="region" aria-labelledby="alerts-count">
+          <h3 id="alerts-count">Alerts</h3>
+          <p>3 Critical</p>
+        </article>
+      </section>
+      <section aria-label="Recent blood requests">
+        <h3>Recent Blood Requests</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Blood Type</th>
+              <th>Units Needed</th>
+              <th>Urgency</th>
+              <th>Hospital</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>O-</td>
+              <td>5</td>
+              <td>High</td>
+              <td>City Hospital</td>
+              <td>Pending</td>
+            </tr>
+            <tr>
+              <td>A+</td>
+              <td>3</td>
+              <td>Medium</td>
+              <td>County Clinic</td>
+              <td>Fulfilled</td>
+            </tr>
+            <tr>
+              <td>B-</td>
+              <td>2</td>
+              <td>Low</td>
+              <td>General Hospital</td>
+              <td>Pending</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

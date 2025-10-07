@@ -530,3 +530,54 @@ function showAuthModal() {
     // Switch to signup form for new donors
     showSignupForm();
 }
+
+// Support Chat functionality
+const socket = io();
+
+// Assume userId is available globally or fetched from session
+const userId = window.userId || 1; // Replace with actual user ID logic
+
+// Join chat room for this user
+socket.emit('join-chat', { userId });
+
+// DOM elements
+const chatMessages = document.getElementById('chat-messages');
+const chatInput = document.getElementById('chat-input');
+const sendChatBtn = document.getElementById('send-chat');
+
+// Function to append message to chat window
+function appendMessage(messageData, isOwnMessage) {
+  if (!chatMessages) return;
+  const messageElem = document.createElement('div');
+  messageElem.classList.add('chat-message');
+  if (isOwnMessage) {
+    messageElem.classList.add('own-message');
+  }
+  messageElem.textContent = messageData.message;
+  chatMessages.appendChild(messageElem);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+// Send message event
+if (sendChatBtn) {
+  sendChatBtn.addEventListener('click', () => {
+    const message = chatInput.value.trim();
+    if (message === '') return;
+    // For demo, send to support user with id 0 (could be changed)
+    const receiverId = 0;
+    socket.emit('send-message', {
+      senderId: userId,
+      receiverId,
+      message
+    });
+    appendMessage({ message }, true);
+    chatInput.value = '';
+  });
+}
+
+// Receive new message event
+socket.on('new-message', (messageData) => {
+  if (messageData.sender_id !== userId) {
+    appendMessage(messageData, false);
+  }
+});

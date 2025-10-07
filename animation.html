@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Blood Donation Animation</title>
+    <link rel="stylesheet" href="animation-styles.css">
+</head>
+<body>
+    <!-- City Scene -->
+    <div id="city-scene" class="scene active">
+        <div class="city-background"></div>
+        <div class="person-walking"></div>
+        <div class="collapse-effect"></div>
+    </div>
+
+    <!-- Interface Transition -->
+    <div id="interface-transition" class="scene">
+        <div class="glowing-interface">
+            <h1>Emergency Blood Donation & Transfusion System</h1>
+        </div>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login-scene" class="scene">
+        <div class="login-container">
+            <h2>Login</h2>
+            <div class="role-buttons">
+                <button class="role-btn donor">Donor</button>
+                <button class="role-btn hospital">Hospital</button>
+                <button class="role-btn blood-bank">Blood Bank</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard-scene" class="scene">
+        <div class="dashboard">
+            <div class="card find-blood">Find Blood Availability</div>
+            <div class="card emergency-alerts">Emergency Alerts</div>
+            <div class="card donor-records">Donor Records</div>
+            <div class="card transfusion-tracking">Transfusion Tracking</div>
+        </div>
+    </div>
+
+    <!-- Map Animation -->
+    <div id="map-scene" class="scene">
+        <div class="map">
+            <div class="donor-icon icon1"></div>
+            <div class="donor-icon icon2"></div>
+            <div class="donor-icon icon3"></div>
+            <div class="hospital-icon"></div>
+            <div class="connection-line line1"></div>
+            <div class="connection-line line2"></div>
+            <div class="connection-line line3"></div>
+        </div>
+    </div>
+
+    <!-- Alert System -->
+    <div id="alert-scene" class="scene">
+        <div class="alert-notification">
+            <div class="alert-text">CRITICAL BLOOD ALERT!</div>
+            <div class="flashing-light"></div>
+        </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div id="progress-scene" class="scene">
+        <div class="progress-container">
+            <div class="progress-step">Blood Collected</div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <div class="progress-step">Tested</div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <div class="progress-step">Delivered</div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ending Scene -->
+    <div id="ending-scene" class="scene">
+        <div class="patient-recovering"></div>
+        <div class="donor-message">
+            <div class="phone-notification">Thank You for Saving Lives!</div>
+        </div>
+        <div class="text-overlay">Donate Blood. Save Lives. Anytime, Anywhere.</div>
+    </div>
+
+    <script src="animation-script.js"></script>
+</body>
+</html>

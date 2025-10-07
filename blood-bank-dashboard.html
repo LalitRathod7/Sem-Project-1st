@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blood Bank Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="floating-nav.css" />
 </head>
 <body>
     <header>
@@ -57,6 +59,38 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div class="dashboard-section">
+            <div class="section-title">Support Chat</div>
+            <div id="chat-container">
+                <div id="chat-messages" role="log" aria-live="polite">
+                    <!-- Messages will be populated here -->
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="chat-input" placeholder="Type your message..." aria-label="Chat message">
+                    <button id="send-chat" aria-label="Send message">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+    <script src="floating-nav.js"></script>
+    <div id="floating-nav">
+        <button id="back-btn" class="nav-btn" title="Go Back">
+            <span class="icon">←</span> Back
+        </button>
+        <button id="home-btn" class="nav-btn" title="Go to Home">
+            <span class="icon">🏠</span> Home
+        </button>
+        <button id="enter-btn" class="nav-btn" title="Enter or Proceed">
+            <span class="icon">→</span> Enter
+        </button>
+        <div class="toggle-switch" id="quick-action-toggle">
+            <span class="icon">⚡</span> Quick Action
+            <label class="switch">
+                <input type="checkbox" id="quick-action-checkbox">
+                <span class="slider"></span>
+            </label>
         </div>
     </div>
 </body>
@@ -169,150 +203,3 @@
         border-radius: 4px;
     }
 </style>
-<script>
-    // JavaScript code moved here from <style> block
-
-    // Example mockData and populateTable for context (add your actual implementations)
-    const mockData = {
-        bloodInventory: [],
-        requests: [],
-        donorHistory: [],
-        notifications: []
-    };
-
-    function populateTable(tableId, data, columns) {
-        const tableBody = document.getElementById(tableId)?.getElementsByTagName('tbody')[0];
-        if (!tableBody) return;
-        tableBody.innerHTML = '';
-        data.forEach(rowData => {
-            const row = document.createElement('tr');
-            columns.forEach(col => {
-                const cell = document.createElement('td');
-                cell.textContent = rowData[col];
-                row.appendChild(cell);
-            });
-            tableBody.appendChild(row);
-        });
-    }
-
-    function populateNotifications() {
-        const panel = document.getElementById('notification-panel');
-        if (!panel) return;
-        panel.innerHTML = '';
-        mockData.notifications.forEach(notif => {
-            const div = document.createElement('div');
-            div.className = `notification ${notif.type}`;
-            div.textContent = notif.message;
-            panel.appendChild(div);
-        });
-    }
-
-    function populateInventory() {
-        populateTable('inventory-table', mockData.bloodInventory, ['type', 'units', 'status']);
-    }
-
-    function populateRequests() {
-        populateTable('requests-table', mockData.requests, ['hospital', 'bloodType', 'units', 'urgency']);
-    }
-
-    function populateHistory() {
-        populateTable('history-table', mockData.donorHistory, ['date', 'bloodType', 'units', 'location']);
-    }
-
-    // Login form handler
-    document.addEventListener('DOMContentLoaded', function() {
-        const loginForm = document.getElementById('login-form');
-        if (loginForm) {
-            loginForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-                const role = document.getElementById('role').value;
-
-                // Simple validation
-                if (!username || !password) {
-                    document.getElementById('login-message').textContent = 'Please fill in all fields.';
-                    document.getElementById('login-message').style.color = 'red';
-                    return;
-                }
-
-                // Mock login success
-                setRole(role);
-                redirectToDashboard(role);
-            });
-        }
-
-        // Check if logged in
-        const role = getRole();
-        if (role && window.location.pathname.includes('login.html')) {
-            redirectToDashboard(role);
-        }
-
-        // Populate data based on page
-        if (window.location.pathname.includes('donor-dashboard.html')) {
-            populateNotifications();
-            populateHistory();
-        } else if (window.location.pathname.includes('blood-bank-dashboard.html')) {
-            populateInventory();
-            populateRequests();
-            populateNotifications();
-        } else if (window.location.pathname.includes('hospital-dashboard.html')) {
-            populateNotifications();
-        } else if (window.location.pathname.includes('blood-search.html')) {
-            // Set back link based on role
-            const backLink = document.getElementById('back-link');
-            if (backLink) {
-                if (role === 'donor') {
-                    backLink.href = 'donor-dashboard.html';
-                } else if (role === 'hospital') {
-                    backLink.href = 'hospital-dashboard.html';
-                } else if (role === 'bloodbank') {
-                    backLink.href = 'blood-bank-dashboard.html';
-                }
-            }
-        }
-
-        // Search form
-        const searchForm = document.getElementById('search-form');
-        if (searchForm) {
-            searchForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const bloodType = document.getElementById('search-blood-type').value;
-                const location = document.getElementById('location-search').value;
-                const resultsDiv = document.getElementById('search-results');
-                resultsDiv.innerHTML = '<h3>Search Results:</h3>';
-                const filtered = bloodType === 'Any' ? mockData.bloodInventory : mockData.bloodInventory.filter(b => b.type === bloodType);
-                filtered.forEach(blood => {
-                    resultsDiv.innerHTML += `<p>${blood.type}: ${blood.units} units available${location ? ' in ' + location : ''}</p>`;
-                });
-            });
-        }
-
-        // Request form
-        const requestForm = document.getElementById('request-form');
-        if (requestForm) {
-            requestForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Blood request submitted! (Mock)');
-            });
-        }
-
-        // Profile form
-        const profileForm = document.getElementById('profile-form');
-        if (profileForm) {
-            profileForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Profile updated! (Mock)');
-            });
-        }
-    });
-
-    // Dummy implementations for setRole and redirectToDashboard and getRole
-    function setRole(role) { localStorage.setItem('role', role); }
-    function getRole() { return localStorage.getItem('role'); }
-    function redirectToDashboard(role) {
-        if (role === 'donor') window.location.href = 'donor-dashboard.html';
-        else if (role === 'hospital') window.location.href = 'hospital-dashboard.html';
-        else if (role === 'bloodbank') window.location.href = 'blood-bank-dashboard.html';
-    }
-</script>

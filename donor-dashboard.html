@@ -81,12 +81,54 @@
                 <!-- Populated by JS -->
             </div>
         </section>
+
+        <section id="support-chat">
+            <h2>Support Chat</h2>
+            <div id="chat-container">
+                <div id="chat-messages" role="log" aria-live="polite">
+                    <!-- Messages will be populated here -->
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="chat-input" placeholder="Type your message..." aria-label="Chat message">
+                    <button id="send-chat" aria-label="Send message">Send</button>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>
         <p>&copy; 2025 Emergency Blood Donation System. All rights reserved.</p>
     </footer>
 
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script src="app.js"></script>
+    <!-- Include Floating Navigation Panel -->
+    <link rel="stylesheet" href="floating-nav.css" />
+    <script src="floating-nav.js"></script>
+    <div id="floating-nav">
+        <button id="back-btn" class="nav-btn" title="Go Back">
+            <span class="icon">←</span> Back
+        </button>
+        <button id="home-btn" class="nav-btn" title="Go to Home">
+            <span class="icon">🏠</span> Home
+        </button>
+        <button id="enter-btn" class="nav-btn" title="Enter or Proceed">
+            <span class="icon">→</span> Enter
+        </button>
+        <div class="toggle-switch" id="notifications-toggle">
+            <span class="icon">🔔</span> Notifications
+            <label class="switch">
+                <input type="checkbox" id="notifications-checkbox">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="toggle-switch" id="emergency-toggle">
+            <span class="icon">🚨</span> Emergency
+            <label class="switch">
+                <input type="checkbox" id="emergency-checkbox">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
 </body>
 </html>

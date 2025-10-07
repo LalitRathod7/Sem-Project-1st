@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>User Profile - Emergency Blood Donation & Transfusion System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9fafb;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 1rem 2rem;
+        }
+        h1 {
+            text-align: center;
+            color: #b71c1c;
+            margin-bottom: 2rem;
+        }
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #b71c1c;
+        }
+        .profile-info {
+            flex-grow: 1;
+        }
+        .profile-info h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        .profile-info p {
+            margin: 0.25rem 0 0 0;
+            font-size: 1rem;
+            color: #666;
+        }
+        form {
+            margin-top: 1rem;
+        }
+        label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: 600;
+            color: #444;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            margin-top: 0.25rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        select:focus {
+            border-color: #b71c1c;
+            outline: none;
+        }
+        button {
+            margin-top: 1.5rem;
+            background-color: #b71c1c;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        button:hover {
+            background-color: #8e0000;
+            transform: scale(1.05);
+        }
+        /* Hazard / Alerts Section */
+        .alerts-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .alerts-header h3 {
+            margin: 0;
+            color: #b71c1c;
+            font-size: 1.5rem;
+        }
+        .alerts-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .alert-item {
+            background-color: #fdecea;
+            border-left: 6px solid #d32f2f;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+        .alert-item.unread {
+            background-color: #f9c0c0;
+        }
+        .alert-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-grow: 1;
+        }
+        .alert-icon {
+            font-size: 1.8rem;
+            color: #d32f2f;
+        }
+        .alert-text {
+            font-size: 1rem;
+            color: #333;
+        }
+        .alert-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .alert-actions button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #b71c1c;
+            transition: color 0.3s ease;
+        }
+        .alert-actions button:hover {
+            color: #8e0000;
+        }
+        /* Floating notification dot */
+        .notification-dot {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 12px;
+            height: 12px;
+            background-color: #d32f2f;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        /* Like / Symbol indicator */
+        .like-indicator {
+            font-size: 1.4rem;
+            color: #b71c1c;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.2s ease;
+        }
+        .like-indicator:hover {
+            transform: scale(1.2);
+        }
+        /* Responsive */
+        @media (max-width: 600px) {
+            .profile-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .profile-pic {
+                width: 80px;
+                height: 80px;
+            }
+            .profile-info h2 {
+                font-size: 1.5rem;
+            }
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Profile</h1>
+        <section class="card profile-section" aria-label="User Information">
+            <div class="profile-header">
+                <img src="default-profile.png" alt="User Profile Picture" class="profile-pic" id="profile-pic" />
+                <div class="profile-info">
+                    <h2 id="user-name">John Doe</h2>
+                    <p id="user-role">Donor</p>
+                </div>
+                <button aria-label="Edit Profile" id="edit-profile-btn" title="Edit Profile" class="like-indicator">✎</button>
+            </div>
+            <form id="profile-form" aria-live="polite" aria-relevant="all" aria-atomic="true">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="john.doe@example.com" required />
+                <label for="contact">Contact:</label>
+                <input type="tel" id="contact" name="contact" value="+1234567890" required />
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city" value="New York" required />
+                <label for="blood-group">Blood Group:</label>
+                <select id="blood-group" name="blood-group" required>
+                    <option value="A+">A+</option>
+                    <option value="A-" >A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-" >B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-" >AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-" selected>O-</option>
+                </select>
+                <button type="submit">Update Info</button>
+            </form>
+        </section>
+        <section class="card alerts-section" aria-label="Hazard and Alerts">
+            <div class="alerts-header">
+                <h3>Emergency Alerts</h3>
+                <button id="mark-all-read-btn" aria-label="Mark all alerts as read" title="Mark all as read">✓</button>
+            </div>
+            <ul class="alerts-list" id="alerts-list" role="list" aria-live="polite" aria-relevant="additions removals">
+                <!-- Alerts will be dynamically populated here -->
+            </ul>
+        </section>
+    </div>
+    <script>
+        // Sample alerts data
+        const alerts = [
+            { id: 1, message: "Critical shortage of O- blood at City Hospital", unread: true },
+            { id: 2, message: "New emergency donation drive scheduled for next week", unread: true },
+            { id: 3, message: "Reminder: Update your contact information", unread: false }
+        ];
+
+        const alertsList = document.getElementById('alerts-list');
+        const markAllReadBtn = document.getElementById('mark-all-read-btn');
+
+        function renderAlerts() {
+            alertsList.innerHTML = '';
+            alerts.forEach(alert => {
+                const li = document.createElement('li');
+                li.className = 'alert-item' + (alert.unread ? ' unread' : '');
+                li.setAttribute('data-id', alert.id);
+
+                const contentDiv = document.createElement('div');
+                contentDiv.className = 'alert-content';
+
+                const iconSpan = document.createElement('span');
+                iconSpan.className = 'alert-icon';
+                iconSpan.textContent = '⚠️';
+
+                const textSpan = document.createElement('span');
+                textSpan.className = 'alert-text';
+                textSpan.textContent = alert.message;
+
+                contentDiv.appendChild(iconSpan);
+                contentDiv.appendChild(textSpan);
+
+                const actionsDiv = document.createElement('div');
+                actionsDiv.className = 'alert-actions';
+
+                const markReadBtn = document.createElement('button');
+                markReadBtn.setAttribute('aria-label', 'Mark alert as read');
+                markReadBtn.title = 'Mark as Read';
+                markReadBtn.textContent = '✓';
+                markReadBtn.addEventListener('click', () => {
+                    alert.unread = false;
+                    renderAlerts();
+                });
+
+                actionsDiv.appendChild(markReadBtn);
+
+                li.appendChild(contentDiv);
+                li.appendChild(actionsDiv);
+
+                if (alert.unread) {
+                    const notifDot = document.createElement('span');
+                    notifDot.className = 'notification-dot';
+                    li.appendChild(notifDot);
+                }
+
+                alertsList.appendChild(li);
+            });
+        }
+
+        markAllReadBtn.addEventListener('click', () => {
+            alerts.forEach(alert => alert.unread = false);
+            renderAlerts();
+        });
+
+        renderAlerts();
+
+        // Profile form submission handler
+        const profileForm = document.getElementById('profile-form');
+        profileForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Profile information updated successfully!');
+        });
+
+        // Edit profile button toggles form fields editable state
+        const editProfileBtn = document.getElementById('edit-profile-btn');
+        let isEditable = false;
+        editProfileBtn.addEventListener('click', () => {
+            isEditable = !isEditable;
+            const inputs = profileForm.querySelectorAll('input, select');
+            inputs.forEach(input => input.disabled = !isEditable);
+            editProfileBtn.textContent = isEditable ? '✔' : '✎';
+        });
+
+        // Initially disable form inputs
+        const inputs = profileForm.querySelectorAll('input, select');
+        inputs.forEach(input => input.disabled = true);
+    </script>
+</body>
+</html>

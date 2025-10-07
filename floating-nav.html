@@ -1,0 +1,25 @@
+<!-- Floating Navigation Panel Component -->
+<!-- This component provides a fixed navigation panel in the top-right corner with switch-style buttons for navigation and quick actions -->
+<!-- Includes Back, Home, Enter/Proceed buttons, and optional toggles for Notifications and Emergency Alert -->
+<!-- To integrate: Include this HTML snippet inside the <body> tag of your dashboard pages -->
+<div id="floating-nav">
+    <button id="back-btn" class="nav-btn" title="Go Back">
+        <span class="icon">←</span> Back
+    </button>
+    <button id="return-btn" class="nav-btn" title="Return">
+        <span class="icon">⤺</span> Return
+    </button>
+    <button id="home-btn" class="nav-btn" title="Go to Home">
+        <span class="icon">🏠</span> Home
+    </button>
+    <button id="enter-btn" class="nav-btn" title="Enter or Proceed">
+        <span class="icon">→</span> Enter
+    </button>
+    <div class="toggle-switch" id="quick-action-toggle">
+        <span class="icon">⚡</span> Quick Action
+        <label class="switch">
+            <input type="checkbox" id="quick-action-checkbox">
+            <span class="slider"></span>
+        </label>
+    </div>
+</div>
